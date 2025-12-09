@@ -1,0 +1,2406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Website Maker | Create Your Professional Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles & CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --secondary: #10b981;
+            --dark: #1f2937;
+            --light: #f9fafb;
+            --gray: #9ca3af;
+            --light-gray: #e5e7eb;
+            --danger: #ef4444;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: #f5f7ff;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--dark);
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #4b5563;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            text-decoration: none;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+        }
+
+        .btn-danger:hover {
+            background-color: #dc2626;
+        }
+
+        .btn-success {
+            background-color: var(--success);
+        }
+
+        .btn-success:hover {
+            background-color: #0da271;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -10px;
+        }
+
+        .form-col {
+            flex: 1;
+            padding: 0 10px;
+            min-width: 250px;
+        }
+
+        .form-section {
+            background-color: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+
+        .form-section h3 {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-section h3 i {
+            font-size: 1.3rem;
+        }
+
+        .required::after {
+            content: ' *';
+            color: var(--danger);
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            color: white;
+            padding: 100px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MDAiIHZpZXdCb3g9IjAgMCAxMjAwIDYwMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMCw2MDAgTDEyMDAsMCBMNjAwLDAgTDAsNjAwIFoiIGZpbGw9IiM1YjRjZTgiIGZpbGwtb3BhY2l0eT0iMC4xIi8+PC9zdmc+');
+            background-size: cover;
+            opacity: 0.3;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header h1 {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        header p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
+            40% {transform: translateY(-20px) translateX(-50%);}
+            60% {transform: translateY(-10px) translateX(-50%);}
+        }
+
+        /* Dynamic Form Items */
+        .dynamic-item {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .dynamic-item h4 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .dynamic-item-controls {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .add-item-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        /* Templates Section */
+        #templates {
+            background-color: white;
+        }
+
+        .templates-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .template-card {
+            background-color: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .template-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        .template-card.selected {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+        }
+
+        .template-preview {
+            height: 180px;
+            background-color: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .template-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.03);
+        }
+
+        .template-preview-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            gap: 4px;
+            width: 80%;
+            height: 80%;
+        }
+
+        .preview-block {
+            background-color: white;
+            border-radius: 2px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .template-1 .preview-block:nth-child(1) {
+            grid-column: 1 / 5;
+            background-color: var(--primary);
+        }
+
+        .template-1 .preview-block:nth-child(2) {
+            grid-column: 1 / 3;
+            grid-row: 2 / 4;
+        }
+
+        .template-2 .preview-block:nth-child(1) {
+            grid-column: 1 / 5;
+            background-color: #1e293b;
+        }
+
+        .template-2 .preview-block:nth-child(2) {
+            grid-column: 1 / 3;
+            background-color: #0f172a;
+        }
+
+        .template-3 .preview-block:nth-child(1) {
+            grid-column: 1 / 5;
+            background-color: #ec4899;
+        }
+
+        .template-3 .preview-block:nth-child(2) {
+            grid-column: 1 / 5;
+            grid-row: 2 / 3;
+            background-color: #f472b6;
+        }
+
+        .template-4 .preview-block:nth-child(1) {
+            grid-column: 1 / 5;
+            background-color: #14b8a6;
+        }
+
+        .template-4 .preview-block:nth-child(2) {
+            grid-column: 1 / 2;
+            grid-row: 2 / 5;
+            background-color: #0d9488;
+        }
+
+        .template-5 .preview-block:nth-child(1) {
+            grid-column: 1 / 5;
+            background-color: #f59e0b;
+        }
+
+        .template-5 .preview-block:nth-child(2) {
+            grid-column: 1 / 3;
+            grid-row: 2 / 3;
+        }
+
+        .template-5 .preview-block:nth-child(3) {
+            grid-column: 3 / 5;
+            grid-row: 2 / 3;
+        }
+
+        .template-5 .preview-block:nth-child(4) {
+            grid-column: 1 / 3;
+            grid-row: 3 / 4;
+        }
+
+        .template-info {
+            padding: 20px;
+        }
+
+        .template-info h3 {
+            margin-bottom: 10px;
+        }
+
+        .template-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        /* Portfolio Preview Section */
+        #preview-section {
+            background-color: #f0f4ff;
+            min-height: 600px;
+        }
+
+        .preview-container {
+            background-color: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            margin-top: 30px;
+            position: relative;
+        }
+
+        .preview-header {
+            background-color: var(--dark);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .preview-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .preview-content {
+            padding: 30px;
+            max-height: 800px;
+            overflow-y: auto;
+        }
+
+        /* Portfolio Templates Styling */
+        .portfolio-template {
+            font-family: inherit;
+        }
+
+        .template-clean {
+            color: #333;
+        }
+
+        .template-clean .hero {
+            background-color: white;
+            padding: 80px 0;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .template-clean .hero h1 {
+            color: #333;
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .template-clean .hero p {
+            color: #666;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .template-clean section {
+            padding: 60px 0;
+        }
+
+        .template-clean h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .template-dark {
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+
+        .template-dark .hero {
+            background-color: #1e293b;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .template-dark .hero h1 {
+            color: #e2e8f0;
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .template-dark .hero p {
+            color: #94a3b8;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .template-dark section {
+            padding: 60px 0;
+        }
+
+        .template-dark h2 {
+            color: #e2e8f0;
+        }
+
+        .template-dark .card {
+            background-color: #1e293b;
+            color: #e2e8f0;
+        }
+
+        .template-creative {
+            background-color: #fdf2f8;
+            color: #831843;
+        }
+
+        .template-creative .hero {
+            background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .template-creative .hero h1 {
+            color: #831843;
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .template-creative .hero p {
+            color: #9d174d;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .template-minimal {
+            background-color: white;
+            color: #115e59;
+        }
+
+        .template-minimal .hero {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .template-minimal .hero h1 {
+            color: #115e59;
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .template-minimal .hero p {
+            color: #0d9488;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .template-gallery {
+            background-color: white;
+            color: #92400e;
+        }
+
+        .template-gallery .hero {
+            background-color: #fffbeb;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .template-gallery .hero h1 {
+            color: #92400e;
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .template-gallery .hero p {
+            color: #b45309;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .template-gallery .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        /* Portfolio Sections Common Styling */
+        .portfolio-section {
+            margin-bottom: 50px;
+        }
+
+        .portfolio-section h2 {
+            margin-bottom: 30px;
+        }
+
+        .skills-container, .services-container, .projects-container, .testimonials-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-card, .service-card, .project-card, .testimonial-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--primary);
+        }
+
+        .gallery-item {
+            background-color: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .gallery-item p {
+            padding: 15px;
+            margin: 0;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .contact-item {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            padding: 20px;
+            background-color: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .contact-item i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+            background-color: var(--primary-dark);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        footer p {
+            color: #d1d5db;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .templates-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .preview-content {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 40px 0;
+            }
+            
+            header {
+                padding: 80px 0 60px;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .form-col {
+                flex: 0 0 100%;
+                margin-bottom: 15px;
+            }
+            
+            .preview-controls {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .preview-controls .btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            
+            .skills-container, .services-container, .projects-container, .testimonials-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .form-section {
+                padding: 20px;
+            }
+            
+            .template-info {
+                padding: 15px;
+            }
+            
+            .dynamic-item {
+                padding: 15px;
+            }
+        }
+
+        /* Utility Classes */
+        .hidden {
+            display: none !important;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-4 {
+            margin-top: 2rem;
+        }
+
+        .mb-4 {
+            margin-bottom: 2rem;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        .flex-wrap {
+            flex-wrap: wrap;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .align-center {
+            align-items: center;
+        }
+
+        .gap-2 {
+            gap: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header id="header">
+        <div class="container header-content">
+            <h1>Create Your Portfolio Website in Minutes</h1>
+            <p>Build a stunning, professional portfolio with no coding required. Choose from beautiful templates and customize with your information.</p>
+            <a href="#portfolio-form" class="btn btn-secondary" id="start-building-btn">
+                <i class="fas fa-rocket"></i> Start Building Portfolio
+            </a>
+        </div>
+        <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </header>
+
+    <!-- Portfolio Form Section -->
+    <section id="portfolio-form">
+        <div class="container">
+            <h2>Your Portfolio Details</h2>
+            <p class="text-center mb-4">Fill in your details to build your custom portfolio website</p>
+            
+            <form id="portfolio-data-form">
+                <!-- Basic Information -->
+                <div class="form-section">
+                    <h3><i class="fas fa-user-circle"></i> Basic Information</h3>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="full-name" class="required">Full Name</label>
+                            <input type="text" id="full-name" class="form-control" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-col">
+                            <label for="profile-photo">Profile Photo URL (Optional)</label>
+                            <input type="text" id="profile-photo" class="form-control" placeholder="https://example.com/your-photo.jpg">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="profession" class="required">Profession / Role</label>
+                            <input type="text" id="profession" class="form-control" placeholder="Web Developer" required>
+                        </div>
+                        <div class="form-col">
+                            <label for="email" class="required">Email</label>
+                            <input type="email" id="email" class="form-control" placeholder="john@example.com" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="phone">Phone</label>
+                            <input type="text" id="phone" class="form-control" placeholder="+1 (123) 456-7890">
+                        </div>
+                        <div class="form-col">
+                            <label for="location">City / Country</label>
+                            <input type="text" id="location" class="form-control" placeholder="New York, USA">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bio" class="required">Short Bio / Introduction</label>
+                        <textarea id="bio" class="form-control" placeholder="A passionate web developer with 5+ years of experience..." required></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="website">Personal Website / Username</label>
+                            <input type="text" id="website" class="form-control" placeholder="johndoe.com or @johndoe">
+                        </div>
+                        <div class="form-col">
+                            <label for="linkedin">LinkedIn URL</label>
+                            <input type="text" id="linkedin" class="form-control" placeholder="https://linkedin.com/in/johndoe">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="github">GitHub URL</label>
+                            <input type="text" id="github" class="form-control" placeholder="https://github.com/johndoe">
+                        </div>
+                        <div class="form-col">
+                            <label for="other-social">Other Social (Instagram, Behance, etc.)</label>
+                            <input type="text" id="other-social" class="form-control" placeholder="https://instagram.com/johndoe">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Section -->
+                <div class="form-section">
+                    <h3><i class="fas fa-star"></i> Hero Section</h3>
+                    <div class="form-group">
+                        <label for="headline">Headline Text</label>
+                        <input type="text" id="headline" class="form-control" placeholder="Hi, I'm John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="tagline">Subheading / Tagline</label>
+                        <input type="text" id="tagline" class="form-control" placeholder="A Creative Web Developer & Designer">
+                    </div>
+                    <div class="form-group">
+                        <label for="cta-text">Call-to-Action Button Text</label>
+                        <input type="text" id="cta-text" class="form-control" placeholder="View My Work">
+                    </div>
+                </div>
+
+                <!-- Skills Section -->
+                <div class="form-section">
+                    <h3><i class="fas fa-cogs"></i> Skills</h3>
+                    <div id="skills-container">
+                        <div class="dynamic-item">
+                            <h4>Skill #1</h4>
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <label>Skill Name</label>
+                                    <input type="text" class="form-control skill-name" placeholder="Web Development">
+                                </div>
+                                <div class="form-col">
+                                    <label>Level / Description</label>
+                                    <input type="text" class="form-control skill-level" placeholder="Advanced, 5+ years experience">
+                                </div>
+                            </div>
+                            <div class="dynamic-item-controls">
+                                <button type="button" class="btn btn-danger remove-skill-btn">
+                                    <i class="fas fa-trash"></i> Remove
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" id="add-skill-btn" class="btn btn-secondary add-item-btn">
+                        <i class="fas fa-plus"></i> Add Skill
+                    </button>
+                </div>
+
+                <!-- Services Section -->
+                <div class="form-section">
+                    <h3><i class="fas fa-briefcase"></i> Services / What I Do</h3>
+                    <div id="services-container">
+                        <div class="dynamic-item">
+                            <h4>Service #1</h4>
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <label>Service Title</label>
+                                    <input type="text" class="form-control service-title" placeholder="Web Design">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Service Description</label>
+                                <textarea class="form-control service-desc" placeholder="Creating beautiful, responsive websites that work across all devices..."></textarea>
+                            </div>
+                            <div class="dynamic-item-controls">
+                                <button type="button" class="btn btn-danger remove-service-btn">
+                                    <i class="fas fa-trash"></i> Remove
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" id="add-service-btn" class="btn btn-secondary add-item-btn">
+                        <i class="fas fa-plus"></i> Add Service
+                    </button>
+                </div>
+
+                <!-- Projects Section -->
+                <div class="form-section">
+                    <h3><i class="fas fa-project-diagram"></i> Projects</h3>
+                    <div id="projects-container">
+                        <div class="dynamic-item">
+                            <h4>Project #1</h4>
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <label>Project Title</label>
+                                    <input type="text" class="form-control project-title" placeholder="E-Commerce Website">
+                                </div>
+                                <div class="form-col">
+                                    <label>Category / Tag</label>
+                                    <input type="text" class="form-control project-category" placeholder="Web Development">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Short Description</label>
+                                <textarea class="form-control project-desc" placeholder="A fully functional e-commerce website with shopping cart, payment integration, and admin panel..."></textarea>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <label>Tech Stack</label>
+                                    <input type="text" class="form-control project-tech" placeholder="HTML, CSS, JavaScript, Node.js">
+                                </div>
+                                <div class="form-col">
+                                    <label>Project Image URL</label>
+                                    <input type="text" class="form-control project-image" placeholder="https://example.com/project-image.jpg">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Project Link</label>
+                                <input type="text" class="form-control project-link" placeholder="https://example.com/project">
+                            </div>
+                            <div class="dynamic-item-controls">
+                                <button type="button" class="btn btn-danger remove-project-btn">
+                                    <i class="fas fa-trash"></i> Remove
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" id="add-project-btn" class="btn btn-secondary add-item-btn">
+                        <i class="fas fa-plus"></i> Add Project
+                    </button>
+                </div>
+
+                <!-- About Section -->
+                <div class="form-section">
+                    <h3><i class="fas fa-info-circle"></i> About Section</h3>
+                    <div class="form-group">
+                        <label for="about-text">Detailed About Me</label>
+                        <textarea id="about-text" class="form-control" placeholder="I am a passionate developer with a strong background in..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="highlights">Highlights (comma-separated)</label>
+                        <input type="text" id="highlights" class="form-control" placeholder="5+ years experience, 50+ projects completed, Certified Developer">
+                    </div>
+                </div>
+
+                <!-- Testimonials Section -->
+                <div class="form-section">
+                    <h3><i class="fas fa-quote-left"></i> Testimonials</h3>
+                    <div id="testimonials-container">
+                        <div class="dynamic-item">
+                            <h4>Testimonial #1</h4>
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <label>Client Name</label>
+                                    <input type="text" class="form-control testimonial-name" placeholder="Jane Smith">
+                                </div>
+                                <div class="form-col">
+                                    <label>Client Role / Company</label>
+                                    <input type="text" class="form-control testimonial-role" placeholder="CEO, Tech Solutions">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Testimonial Text</label>
+                                <textarea class="form-control testimonial-text" placeholder="John delivered an outstanding project on time and exceeded our expectations..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Client Image URL (Optional)</label>
+                                <input type="text" class="form-control testimonial-image" placeholder="https://example.com/client-photo.jpg">
+                            </div>
+                            <div class="dynamic-item-controls">
+                                <button type="button" class="btn btn-danger remove-testimonial-btn">
+                                    <i class="fas fa-trash"></i> Remove
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" id="add-testimonial-btn" class="btn btn-secondary add-item-btn">
+                        <i class="fas fa-plus"></i> Add Testimonial
+                    </button>
+                </div>
+
+                <!-- Gallery Section -->
+                <div class="form-section">
+                    <h3><i class="fas fa-images"></i> Gallery</h3>
+                    <div id="gallery-container">
+                        <div class="dynamic-item">
+                            <h4>Gallery Item #1</h4>
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <label>Image URL</label>
+                                    <input type="text" class="form-control gallery-image" placeholder="https://example.com/image1.jpg">
+                                </div>
+                                <div class="form-col">
+                                    <label>Caption</label>
+                                    <input type="text" class="form-control gallery-caption" placeholder="Project Screenshot">
+                                </div>
+                            </div>
+                            <div class="dynamic-item-controls">
+                                <button type="button" class="btn btn-danger remove-gallery-btn">
+                                    <i class="fas fa-trash"></i> Remove
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" id="add-gallery-btn" class="btn btn-secondary add-item-btn">
+                        <i class="fas fa-plus"></i> Add Gallery Item
+                    </button>
+                </div>
+
+                <!-- Contact Section -->
+                <div class="form-section">
+                    <h3><i class="fas fa-envelope"></i> Contact Section</h3>
+                    <div class="form-group">
+                        <label for="contact-heading">Contact Heading</label>
+                        <input type="text" id="contact-heading" class="form-control" placeholder="Get In Touch">
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-message">Contact Message</label>
+                        <textarea id="contact-message" class="form-control" placeholder="Feel free to reach out for collaborations or just a friendly hello"></textarea>
+                    </div>
+                </div>
+
+                <!-- Form Submission -->
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-success" style="padding: 15px 40px; font-size: 1.1rem;">
+                        <i class="fas fa-check-circle"></i> Save & Continue to Templates
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Portfolio Templates Section -->
+    <section id="templates">
+        <div class="container">
+            <h2>Choose Your Portfolio Template</h2>
+            <p class="text-center mb-4">Select a template that matches your style and profession</p>
+            
+            <div class="templates-container">
+                <!-- Template 1: Clean Light Portfolio -->
+                <div class="template-card template-1" data-template="clean">
+                    <div class="template-preview">
+                        <div class="template-preview-grid">
+                            <div class="preview-block"></div>
+                            <div class="preview-block"></div>
+                            <div class="preview-block"></div>
+                            <div class="preview-block"></div>
+                            <div class="preview-block"></div>
+                            <div class="preview-block"></div>
+                        </div>
+                    </div>
+                    <div class="template-info">
+                        <h3>Clean Light Portfolio</h3>
+                        <p>Professional, minimal design perfect for developers, writers, and consultants.</p>
+                        <button class="btn use-template-btn" data-template="clean">Use this Template</button>
+                    </div>
+                </div>
+
+                <!-- Template 2: Dark Developer Theme -->
+                <div class="template-card template-2" data-template="dark">
+                    <div class="template-preview">
+                        <div class="template-preview-grid">
+                            <div class="preview-block"></div>
+                            <div class="preview-block"></div>
+                            <div class="preview-block"></div>
+                            <div class="preview-block"></div>
+                            <div class="preview-block"></div>
+                            <div class="preview-block"></div>
+                        </div>
+                    </div>
+                    <div class="template-info">
+                        <h3>Dark Developer Theme</h3>
+                        <p>Modern dark theme ideal for developers, programmers, and tech professionals.</p>
+                        <button class="btn use-template-btn" data-template="dark">Use this Template</button>
+                    </div>
+                </div>
+
+                <!-- Template 3: Creative Designer Portfolio -->
+                <div class="template-card template-3" data-template="creative">
+                    <div class="template-preview">
+                        <div class="template-preview-grid">
+                            <div class="preview-block"></div>
+                            <div class="preview-block"></div>
+                            <div class="preview-block"></div>
+                            <div class="preview-block"></div>
+                            <div class="preview-block"></div>
+                            <div class="preview-block"></div>
+                        </div>
+                    </div>
+                    <div class="template-info">
+                        <h3>Creative Designer Portfolio</h3>
+                        <p>Colorful, creative layout perfect for designers, artists, and creatives.</p>
+                        <button class="btn use-template-btn" data-template="creative">Use this Template</button>
+                    </div>
+                </div>
+
+                <!-- Template 4: Minimal One-Page Portfolio -->
+                <div class="template-card template-4" data-template="minimal">
+                    <div class="template-preview">
+                        <div class="template-preview-grid">
+                            <div class="preview-block"></div>
+                            <div class="preview-block"></div>
+                            <div class="preview-block"></div>
+                            <div class="preview-block"></div>
+                            <div class="preview-block"></div>
+                            <div class="preview-block"></div>
+                        </div>
+                    </div>
+                    <div class="template-info">
+                        <h3>Minimal One-Page Portfolio</h3>
+                        <p>Ultra-minimalist design with clean typography and ample white space.</p>
+                        <button class="btn use-template-btn" data-template="minimal">Use this Template</button>
+                    </div>
+                </div>
+
+                <!-- Template 5: Grid-based Gallery Portfolio -->
+                <div class="template-card template-5" data-template="gallery">
+                    <div class="template-preview">
+                        <div class="template-preview-grid">
+                            <div class="preview-block"></div>
+                            <div class="preview-block"></div>
+                            <div class="preview-block"></div>
+                            <div class="preview-block"></div>
+                            <div class="preview-block"></div>
+                            <div class="preview-block"></div>
+                        </div>
+                    </div>
+                    <div class="template-info">
+                        <h3>Grid-based Gallery Portfolio</h3>
+                        <p>Grid-focused layout ideal for photographers, artists, and visual portfolios.</p>
+                        <button class="btn use-template-btn" data-template="gallery">Use this Template</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Preview Section -->
+    <section id="preview-section" class="hidden">
+        <div class="container">
+            <h2>Your Portfolio Preview</h2>
+            <p class="text-center mb-4">Preview your portfolio and download it when ready</p>
+            
+            <div class="preview-container">
+                <div class="preview-header">
+                    <h3 style="color: white; margin: 0;">Portfolio Preview</h3>
+                    <div class="preview-controls">
+                        <button id="edit-details-btn" class="btn btn-secondary">
+                            <i class="fas fa-edit"></i> Edit Details
+                        </button>
+                        <button id="change-template-btn" class="btn btn-secondary">
+                            <i class="fas fa-palette"></i> Change Template
+                        </button>
+                        <button id="print-pdf-btn" class="btn btn-secondary">
+                            <i class="fas fa-print"></i> Print / Save as PDF
+                        </button>
+                        <button id="download-html-btn" class="btn btn-success">
+                            <i class="fas fa-download"></i> Download Portfolio (index.html)
+                        </button>
+                    </div>
+                </div>
+                <div class="preview-content">
+                    <div id="portfolio-preview"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <h3>Portfolio Website Maker</h3>
+            <p>Create your professional portfolio in minutes. No coding required. Completely free.</p>
+            <p>© <span id="current-year"></span> Portfolio Website Maker. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Global data object to store portfolio information
+        const portfolioData = {
+            basicInfo: {},
+            hero: {},
+            skills: [],
+            services: [],
+            projects: [],
+            about: {},
+            testimonials: [],
+            gallery: [],
+            contact: {},
+            selectedTemplate: 'clean'
+        };
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            // Scroll to form when "Start Building Portfolio" button is clicked
+            document.getElementById('start-building-btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('portfolio-form').scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // Form submission handler
+            document.getElementById('portfolio-data-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                collectFormData();
+                document.getElementById('templates').scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // Initialize dynamic form sections
+            initDynamicSections();
+            
+            // Initialize template selection
+            initTemplateSelection();
+            
+            // Initialize preview controls
+            initPreviewControls();
+            
+            // Set up some default form values for demo purposes
+            setDemoData();
+        });
+
+        // Function to set demo data for testing
+        function setDemoData() {
+            document.getElementById('full-name').value = 'Alex Johnson';
+            document.getElementById('profession').value = 'Full Stack Developer';
+            document.getElementById('email').value = 'alex@example.com';
+            document.getElementById('phone').value = '+1 (555) 123-4567';
+            document.getElementById('location').value = 'San Francisco, USA';
+            document.getElementById('bio').value = 'Passionate full-stack developer with 6+ years of experience building web applications. Specialized in React, Node.js, and cloud technologies.';
+            document.getElementById('website').value = 'alexjohnson.dev';
+            document.getElementById('linkedin').value = 'https://linkedin.com/in/alexjohnson';
+            document.getElementById('github').value = 'https://github.com/alexjohnson';
+            document.getElementById('other-social').value = 'https://twitter.com/alexjohnson';
+            document.getElementById('headline').value = "Hi, I'm Alex Johnson";
+            document.getElementById('tagline').value = 'Full Stack Developer & UI/UX Designer';
+            document.getElementById('cta-text').value = 'Explore My Work';
+            document.getElementById('about-text').value = 'I am a passionate developer with a strong background in both front-end and back-end technologies. I love creating efficient, scalable solutions that solve real-world problems. My expertise includes JavaScript frameworks, cloud infrastructure, and responsive design.';
+            document.getElementById('highlights').value = '6+ years experience, 100+ projects, AWS Certified, React Specialist';
+            document.getElementById('contact-heading').value = 'Get In Touch';
+            document.getElementById('contact-message').value = 'Feel free to reach out for collaborations or just a friendly hello. I\'m always open to discussing new projects and opportunities.';
+        }
+
+        // Function to initialize dynamic form sections
+        function initDynamicSections() {
+            // Skills
+            document.getElementById('add-skill-btn').addEventListener('click', function() {
+                addDynamicItem('skills');
+            });
+            
+            // Services
+            document.getElementById('add-service-btn').addEventListener('click', function() {
+                addDynamicItem('services');
+            });
+            
+            // Projects
+            document.getElementById('add-project-btn').addEventListener('click', function() {
+                addDynamicItem('projects');
+            });
+            
+            // Testimonials
+            document.getElementById('add-testimonial-btn').addEventListener('click', function() {
+                addDynamicItem('testimonials');
+            });
+            
+            // Gallery
+            document.getElementById('add-gallery-btn').addEventListener('click', function() {
+                addDynamicItem('gallery');
+            });
+            
+            // Set up event delegation for remove buttons
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('remove-skill-btn') || 
+                    e.target.closest('.remove-skill-btn')) {
+                    removeDynamicItem(e, 'skills');
+                }
+                if (e.target.classList.contains('remove-service-btn') || 
+                    e.target.closest('.remove-service-btn')) {
+                    removeDynamicItem(e, 'services');
+                }
+                if (e.target.classList.contains('remove-project-btn') || 
+                    e.target.closest('.remove-project-btn')) {
+                    removeDynamicItem(e, 'projects');
+                }
+                if (e.target.classList.contains('remove-testimonial-btn') || 
+                    e.target.closest('.remove-testimonial-btn')) {
+                    removeDynamicItem(e, 'testimonials');
+                }
+                if (e.target.classList.contains('remove-gallery-btn') || 
+                    e.target.closest('.remove-gallery-btn')) {
+                    removeDynamicItem(e, 'gallery');
+                }
+            });
+        }
+
+        // Function to add dynamic form items
+        function addDynamicItem(type) {
+            const container = document.getElementById(`${type}-container`);
+            const itemCount = container.children.length + 1;
+            
+            let newItem;
+            
+            switch(type) {
+                case 'skills':
+                    newItem = createSkillItem(itemCount);
+                    break;
+                case 'services':
+                    newItem = createServiceItem(itemCount);
+                    break;
+                case 'projects':
+                    newItem = createProjectItem(itemCount);
+                    break;
+                case 'testimonials':
+                    newItem = createTestimonialItem(itemCount);
+                    break;
+                case 'gallery':
+                    newItem = createGalleryItem(itemCount);
+                    break;
+            }
+            
+            container.appendChild(newItem);
+        }
+
+        // Function to remove dynamic form items
+        function removeDynamicItem(e, type) {
+            const button = e.target.classList.contains('btn') ? e.target : e.target.closest('.btn');
+            const item = button.closest('.dynamic-item');
+            
+            // Don't remove the last item
+            const container = document.getElementById(`${type}-container`);
+            if (container.children.length <= 1) {
+                alert(`You need at least one ${type.slice(0, -1)} item.`);
+                return;
+            }
+            
+            item.remove();
+        }
+
+        // Helper functions to create dynamic items
+        function createSkillItem(count) {
+            const div = document.createElement('div');
+            div.className = 'dynamic-item';
+            div.innerHTML = `
+                <h4>Skill #${count}</h4>
+                <div class="form-row">
+                    <div class="form-col">
+                        <label>Skill Name</label>
+                        <input type="text" class="form-control skill-name" placeholder="Web Development">
+                    </div>
+                    <div class="form-col">
+                        <label>Level / Description</label>
+                        <input type="text" class="form-control skill-level" placeholder="Advanced, 5+ years experience">
+                    </div>
+                </div>
+                <div class="dynamic-item-controls">
+                    <button type="button" class="btn btn-danger remove-skill-btn">
+                        <i class="fas fa-trash"></i> Remove
+                    </button>
+                </div>
+            `;
+            return div;
+        }
+
+        function createServiceItem(count) {
+            const div = document.createElement('div');
+            div.className = 'dynamic-item';
+            div.innerHTML = `
+                <h4>Service #${count}</h4>
+                <div class="form-row">
+                    <div class="form-col">
+                        <label>Service Title</label>
+                        <input type="text" class="form-control service-title" placeholder="Web Design">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Service Description</label>
+                    <textarea class="form-control service-desc" placeholder="Creating beautiful, responsive websites that work across all devices..."></textarea>
+                </div>
+                <div class="dynamic-item-controls">
+                    <button type="button" class="btn btn-danger remove-service-btn">
+                        <i class="fas fa-trash"></i> Remove
+                    </button>
+                </div>
+            `;
+            return div;
+        }
+
+        function createProjectItem(count) {
+            const div = document.createElement('div');
+            div.className = 'dynamic-item';
+            div.innerHTML = `
+                <h4>Project #${count}</h4>
+                <div class="form-row">
+                    <div class="form-col">
+                        <label>Project Title</label>
+                        <input type="text" class="form-control project-title" placeholder="E-Commerce Website">
+                    </div>
+                    <div class="form-col">
+                        <label>Category / Tag</label>
+                        <input type="text" class="form-control project-category" placeholder="Web Development">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Short Description</label>
+                    <textarea class="form-control project-desc" placeholder="A fully functional e-commerce website with shopping cart, payment integration, and admin panel..."></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-col">
+                        <label>Tech Stack</label>
+                        <input type="text" class="form-control project-tech" placeholder="HTML, CSS, JavaScript, Node.js">
+                    </div>
+                    <div class="form-col">
+                        <label>Project Image URL</label>
+                        <input type="text" class="form-control project-image" placeholder="https://example.com/project-image.jpg">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Project Link</label>
+                    <input type="text" class="form-control project-link" placeholder="https://example.com/project">
+                </div>
+                <div class="dynamic-item-controls">
+                    <button type="button" class="btn btn-danger remove-project-btn">
+                        <i class="fas fa-trash"></i> Remove
+                    </button>
+                </div>
+            `;
+            return div;
+        }
+
+        function createTestimonialItem(count) {
+            const div = document.createElement('div');
+            div.className = 'dynamic-item';
+            div.innerHTML = `
+                <h4>Testimonial #${count}</h4>
+                <div class="form-row">
+                    <div class="form-col">
+                        <label>Client Name</label>
+                        <input type="text" class="form-control testimonial-name" placeholder="Jane Smith">
+                    </div>
+                    <div class="form-col">
+                        <label>Client Role / Company</label>
+                        <input type="text" class="form-control testimonial-role" placeholder="CEO, Tech Solutions">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Testimonial Text</label>
+                    <textarea class="form-control testimonial-text" placeholder="John delivered an outstanding project on time and exceeded our expectations..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Client Image URL (Optional)</label>
+                    <input type="text" class="form-control testimonial-image" placeholder="https://example.com/client-photo.jpg">
+                </div>
+                <div class="dynamic-item-controls">
+                    <button type="button" class="btn btn-danger remove-testimonial-btn">
+                        <i class="fas fa-trash"></i> Remove
+                    </button>
+                </div>
+            `;
+            return div;
+        }
+
+        function createGalleryItem(count) {
+            const div = document.createElement('div');
+            div.className = 'dynamic-item';
+            div.innerHTML = `
+                <h4>Gallery Item #${count}</h4>
+                <div class="form-row">
+                    <div class="form-col">
+                        <label>Image URL</label>
+                        <input type="text" class="form-control gallery-image" placeholder="https://example.com/image1.jpg">
+                    </div>
+                    <div class="form-col">
+                        <label>Caption</label>
+                        <input type="text" class="form-control gallery-caption" placeholder="Project Screenshot">
+                    </div>
+                </div>
+                <div class="dynamic-item-controls">
+                    <button type="button" class="btn btn-danger remove-gallery-btn">
+                        <i class="fas fa-trash"></i> Remove
+                    </button>
+                </div>
+            `;
+            return div;
+        }
+
+        // Function to collect form data into portfolioData object
+        function collectFormData() {
+            // Basic Info
+            portfolioData.basicInfo = {
+                fullName: document.getElementById('full-name').value,
+                profilePhoto: document.getElementById('profile-photo').value || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80',
+                profession: document.getElementById('profession').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value || 'Not specified',
+                location: document.getElementById('location').value || 'Not specified',
+                bio: document.getElementById('bio').value,
+                website: document.getElementById('website').value || '#',
+                linkedin: document.getElementById('linkedin').value || '#',
+                github: document.getElementById('github').value || '#',
+                otherSocial: document.getElementById('other-social').value || '#'
+            };
+
+            // Hero Section
+            portfolioData.hero = {
+                headline: document.getElementById('headline').value || `Hi, I'm ${portfolioData.basicInfo.fullName}`,
+                tagline: document.getElementById('tagline').value || portfolioData.basicInfo.profession,
+                ctaText: document.getElementById('cta-text').value || 'View My Work'
+            };
+
+            // Skills
+            portfolioData.skills = [];
+            document.querySelectorAll('#skills-container .dynamic-item').forEach(item => {
+                portfolioData.skills.push({
+                    name: item.querySelector('.skill-name').value || 'Skill',
+                    level: item.querySelector('.skill-level').value || 'Proficient'
+                });
+            });
+
+            // Services
+            portfolioData.services = [];
+            document.querySelectorAll('#services-container .dynamic-item').forEach(item => {
+                portfolioData.services.push({
+                    title: item.querySelector('.service-title').value || 'Service',
+                    description: item.querySelector('.service-desc').value || 'Service description'
+                });
+            });
+
+            // Projects
+            portfolioData.projects = [];
+            document.querySelectorAll('#projects-container .dynamic-item').forEach((item, index) => {
+                portfolioData.projects.push({
+                    title: item.querySelector('.project-title').value || `Project ${index + 1}`,
+                    category: item.querySelector('.project-category').value || 'Web Development',
+                    description: item.querySelector('.project-desc').value || 'Project description',
+                    tech: item.querySelector('.project-tech').value || 'HTML, CSS, JavaScript',
+                    image: item.querySelector('.project-image').value || `https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=${index + 1}`,
+                    link: item.querySelector('.project-link').value || '#'
+                });
+            });
+
+            // About
+            portfolioData.about = {
+                text: document.getElementById('about-text').value || 'About me text',
+                highlights: document.getElementById('highlights').value.split(',').map(h => h.trim()) || []
+            };
+
+            // Testimonials
+            portfolioData.testimonials = [];
+            document.querySelectorAll('#testimonials-container .dynamic-item').forEach((item, index) => {
+                portfolioData.testimonials.push({
+                    name: item.querySelector('.testimonial-name').value || `Client ${index + 1}`,
+                    role: item.querySelector('.testimonial-role').value || 'CEO, Company',
+                    text: item.querySelector('.testimonial-text').value || 'Testimonial text',
+                    image: item.querySelector('.testimonial-image').value || `https://images.unsplash.com/photo-1494790108755-2616c113a1c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=${index + 1}`
+                });
+            });
+
+            // Gallery
+            portfolioData.gallery = [];
+            document.querySelectorAll('#gallery-container .dynamic-item').forEach((item, index) => {
+                portfolioData.gallery.push({
+                    image: item.querySelector('.gallery-image').value || `https://images.unsplash.com/photo-1558655146-364adaf1fcc9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=${index + 1}`,
+                    caption: item.querySelector('.gallery-caption').value || `Image ${index + 1}`
+                });
+            });
+
+            // Contact
+            portfolioData.contact = {
+                heading: document.getElementById('contact-heading').value || 'Get In Touch',
+                message: document.getElementById('contact-message').value || 'Feel free to reach out for collaborations or just a friendly hello'
+            };
+
+            console.log('Portfolio data collected:', portfolioData);
+        }
+
+        // Function to initialize template selection
+        function initTemplateSelection() {
+            // Template selection
+            document.querySelectorAll('.use-template-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const template = this.getAttribute('data-template');
+                    portfolioData.selectedTemplate = template;
+                    
+                    // Update UI to show selected template
+                    document.querySelectorAll('.template-card').forEach(card => {
+                        card.classList.remove('selected');
+                    });
+                    this.closest('.template-card').classList.add('selected');
+                    
+                    // Generate and show preview
+                    generatePreview();
+                    
+                    // Scroll to preview section
+                    document.getElementById('preview-section').classList.remove('hidden');
+                    document.getElementById('preview-section').scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+        }
+
+        // Function to initialize preview controls
+        function initPreviewControls() {
+            // Edit Details button
+            document.getElementById('edit-details-btn').addEventListener('click', function() {
+                document.getElementById('portfolio-form').scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // Change Template button
+            document.getElementById('change-template-btn').addEventListener('click', function() {
+                document.getElementById('templates').scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // Print / Save as PDF button
+            document.getElementById('print-pdf-btn').addEventListener('click', function() {
+                window.print();
+            });
+
+            // Download HTML button
+            document.getElementById('download-html-btn').addEventListener('click', function() {
+                downloadPortfolioHTML();
+            });
+        }
+
+        // Function to generate portfolio preview
+        function generatePreview() {
+            const previewContainer = document.getElementById('portfolio-preview');
+            
+            // Clear previous preview
+            previewContainer.innerHTML = '';
+            
+            // Create the portfolio based on selected template
+            let portfolioHTML = '';
+            
+            switch(portfolioData.selectedTemplate) {
+                case 'clean':
+                    portfolioHTML = generateCleanTemplate();
+                    break;
+                case 'dark':
+                    portfolioHTML = generateDarkTemplate();
+                    break;
+                case 'creative':
+                    portfolioHTML = generateCreativeTemplate();
+                    break;
+                case 'minimal':
+                    portfolioHTML = generateMinimalTemplate();
+                    break;
+                case 'gallery':
+                    portfolioHTML = generateGalleryTemplate();
+                    break;
+                default:
+                    portfolioHTML = generateCleanTemplate();
+            }
+            
+            previewContainer.innerHTML = portfolioHTML;
+        }
+
+        // Template generation functions
+        function generateCleanTemplate() {
+            return `
+                <div class="portfolio-template template-clean">
+                    <!-- Hero Section -->
+                    <section class="hero">
+                        <div class="container">
+                            <h1>${portfolioData.hero.headline}</h1>
+                            <p>${portfolioData.hero.tagline}</p>
+                            <a href="#projects" class="btn">${portfolioData.hero.ctaText}</a>
+                        </div>
+                    </section>
+
+                    <!-- About Section -->
+                    <section id="about" class="portfolio-section">
+                        <div class="container">
+                            <h2>About Me</h2>
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <img src="${portfolioData.basicInfo.profilePhoto}" alt="${portfolioData.basicInfo.fullName}" style="width: 100%; max-width: 300px; border-radius: 50%; margin: 0 auto 20px; display: block;">
+                                </div>
+                                <div class="form-col">
+                                    <p>${portfolioData.about.text}</p>
+                                    ${portfolioData.about.highlights.length > 0 ? `<ul>${portfolioData.about.highlights.map(h => `<li>${h}</li>`).join('')}</ul>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Skills Section -->
+                    ${portfolioData.skills.length > 0 ? `
+                    <section id="skills" class="portfolio-section">
+                        <div class="container">
+                            <h2>My Skills</h2>
+                            <div class="skills-container">
+                                ${portfolioData.skills.map(skill => `
+                                    <div class="skill-card">
+                                        <h3>${skill.name}</h3>
+                                        <p>${skill.level}</p>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </section>` : ''}
+
+                    <!-- Services Section -->
+                    ${portfolioData.services.length > 0 ? `
+                    <section id="services" class="portfolio-section">
+                        <div class="container">
+                            <h2>My Services</h2>
+                            <div class="services-container">
+                                ${portfolioData.services.map(service => `
+                                    <div class="service-card">
+                                        <h3>${service.title}</h3>
+                                        <p>${service.description}</p>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </section>` : ''}
+
+                    <!-- Projects Section -->
+                    ${portfolioData.projects.length > 0 ? `
+                    <section id="projects" class="portfolio-section">
+                        <div class="container">
+                            <h2>My Projects</h2>
+                            <div class="projects-container">
+                                ${portfolioData.projects.map(project => `
+                                    <div class="project-card">
+                                        <h3>${project.title}</h3>
+                                        <p><strong>Category:</strong> ${project.category}</p>
+                                        <p>${project.description}</p>
+                                        <p><strong>Tech Stack:</strong> ${project.tech}</p>
+                                        ${project.image ? `<img src="${project.image}" alt="${project.title}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 5px; margin: 10px 0;">` : ''}
+                                        <a href="${project.link}" class="btn" target="_blank">View Project</a>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </section>` : ''}
+
+                    <!-- Testimonials Section -->
+                    ${portfolioData.testimonials.length > 0 ? `
+                    <section id="testimonials" class="portfolio-section">
+                        <div class="container">
+                            <h2>Testimonials</h2>
+                            <div class="testimonials-container">
+                                ${portfolioData.testimonials.map(testimonial => `
+                                    <div class="testimonial-card">
+                                        <p>"${testimonial.text}"</p>
+                                        <div style="display: flex; align-items: center; margin-top: 20px;">
+                                            ${testimonial.image ? `<img src="${testimonial.image}" alt="${testimonial.name}" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px;">` : ''}
+                                            <div>
+                                                <h4>${testimonial.name}</h4>
+                                                <p>${testimonial.role}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </section>` : ''}
+
+                    <!-- Gallery Section -->
+                    ${portfolioData.gallery.length > 0 ? `
+                    <section id="gallery" class="portfolio-section">
+                        <div class="container">
+                            <h2>Gallery</h2>
+                            <div class="gallery-grid">
+                                ${portfolioData.gallery.map(item => `
+                                    <div class="gallery-item">
+                                        <img src="${item.image}" alt="${item.caption}">
+                                        <p>${item.caption}</p>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </section>` : ''}
+
+                    <!-- Contact Section -->
+                    <section id="contact" class="portfolio-section">
+                        <div class="container">
+                            <h2>${portfolioData.contact.heading}</h2>
+                            <p class="text-center">${portfolioData.contact.message}</p>
+                            
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <i class="fas fa-envelope"></i>
+                                    <h3>Email</h3>
+                                    <p>${portfolioData.basicInfo.email}</p>
+                                </div>
+                                
+                                <div class="contact-item">
+                                    <i class="fas fa-phone"></i>
+                                    <h3>Phone</h3>
+                                    <p>${portfolioData.basicInfo.phone}</p>
+                                </div>
+                                
+                                <div class="contact-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <h3>Location</h3>
+                                    <p>${portfolioData.basicInfo.location}</p>
+                                </div>
+                            </div>
+                            
+                            <div class="social-links">
+                                ${portfolioData.basicInfo.linkedin !== '#' ? `<a href="${portfolioData.basicInfo.linkedin}" target="_blank"><i class="fab fa-linkedin-in"></i></a>` : ''}
+                                ${portfolioData.basicInfo.github !== '#' ? `<a href="${portfolioData.basicInfo.github}" target="_blank"><i class="fab fa-github"></i></a>` : ''}
+                                ${portfolioData.basicInfo.website !== '#' ? `<a href="${portfolioData.basicInfo.website}" target="_blank"><i class="fas fa-globe"></i></a>` : ''}
+                                ${portfolioData.basicInfo.otherSocial !== '#' ? `<a href="${portfolioData.basicInfo.otherSocial}" target="_blank"><i class="fab fa-twitter"></i></a>` : ''}
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <footer style="background-color: #1f2937; color: white; padding: 30px 0; text-align: center;">
+                        <div class="container">
+                            <p>© ${new Date().getFullYear()} ${portfolioData.basicInfo.fullName}. All rights reserved.</p>
+                        </div>
+                    </footer>
+                </div>
+            `;
+        }
+
+        // Note: Other template generation functions (generateDarkTemplate, generateCreativeTemplate, etc.) 
+        // would follow a similar pattern but with different styling. For brevity, I'll include a simplified version.
+        // In a full implementation, each would have its own unique structure and styling.
+
+        function generateDarkTemplate() {
+            // Similar structure to clean template but with dark theme classes
+            return generateCleanTemplate().replace('template-clean', 'template-dark');
+        }
+
+        function generateCreativeTemplate() {
+            // Similar structure to clean template but with creative theme classes
+            return generateCleanTemplate().replace('template-clean', 'template-creative');
+        }
+
+        function generateMinimalTemplate() {
+            // Similar structure to clean template but with minimal theme classes
+            return generateCleanTemplate().replace('template-clean', 'template-minimal');
+        }
+
+        function generateGalleryTemplate() {
+            // Similar structure to clean template but with gallery theme classes
+            return generateCleanTemplate().replace('template-clean', 'template-gallery');
+        }
+
+        // Function to download portfolio as HTML file
+        function downloadPortfolioHTML() {
+            // Get the portfolio HTML based on selected template
+            let portfolioHTML = '';
+            
+            switch(portfolioData.selectedTemplate) {
+                case 'clean':
+                    portfolioHTML = generateCleanTemplate();
+                    break;
+                case 'dark':
+                    portfolioHTML = generateDarkTemplate();
+                    break;
+                case 'creative':
+                    portfolioHTML = generateCreativeTemplate();
+                    break;
+                case 'minimal':
+                    portfolioHTML = generateMinimalTemplate();
+                    break;
+                case 'gallery':
+                    portfolioHTML = generateGalleryTemplate();
+                    break;
+                default:
+                    portfolioHTML = generateCleanTemplate();
+            }
+            
+            // Get CSS for the selected template
+            const templateCSS = getTemplateCSS(portfolioData.selectedTemplate);
+            
+            // Create the complete HTML document
+            const fullHTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${portfolioData.basicInfo.fullName} | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 60px 0;
+        }
+        
+        h1, h2, h3, h4 {
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background-color: #4f46e5;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background-color: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn:hover {
+            background-color: #4338ca;
+            transform: translateY(-2px);
+        }
+        
+        /* Template-specific CSS */
+        ${templateCSS}
+        
+        /* Portfolio Sections */
+        .portfolio-section {
+            margin-bottom: 50px;
+        }
+        
+        .skills-container, .services-container, .projects-container, .testimonials-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .skill-card, .service-card, .project-card, .testimonial-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #4f46e5;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        
+        .contact-item {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #4f46e5;
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-3px);
+            background-color: #4338ca;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            section {
+                padding: 40px 0;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .skills-container, .services-container, .projects-container, .testimonials-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    ${portfolioHTML}
+</body>
+</html>`;
+            
+            // Create a Blob with the HTML content
+            const blob = new Blob([fullHTML], { type: 'text/html' });
+            
+            // Create a download link
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'index.html';
+            
+            // Append to the document, click, and remove
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Show success message
+            alert('Portfolio downloaded successfully! Open the index.html file in your browser to view your portfolio.');
+        }
+
+        // Function to get CSS for a specific template
+        function getTemplateCSS(templateName) {
+            const cssMap = {
+                clean: `
+                    body {
+                        background-color: white;
+                        color: #1f2937;
+                    }
+                    
+                    .hero {
+                        background-color: white;
+                        padding: 80px 0;
+                        text-align: center;
+                        border-bottom: 1px solid #eee;
+                    }
+                    
+                    .hero h1 {
+                        color: #1f2937;
+                    }
+                    
+                    .hero p {
+                        color: #6b7280;
+                        font-size: 1.2rem;
+                        max-width: 700px;
+                        margin: 0 auto 30px;
+                    }
+                    
+                    section {
+                        padding: 60px 0;
+                    }
+                    
+                    h2 {
+                        color: #1f2937;
+                    }
+                `,
+                
+                dark: `
+                    body {
+                        background-color: #0f172a;
+                        color: #e2e8f0;
+                    }
+                    
+                    .hero {
+                        background-color: #1e293b;
+                        padding: 100px 0;
+                        text-align: center;
+                    }
+                    
+                    .hero h1 {
+                        color: #e2e8f0;
+                    }
+                    
+                    .hero p {
+                        color: #94a3b8;
+                        font-size: 1.2rem;
+                        max-width: 700px;
+                        margin: 0 auto 30px;
+                    }
+                    
+                    .skill-card, .service-card, .project-card, .testimonial-card, .contact-item {
+                        background-color: #1e293b;
+                        color: #e2e8f0;
+                    }
+                    
+                    h2 {
+                        color: #e2e8f0;
+                    }
+                `,
+                
+                creative: `
+                    body {
+                        background-color: #fdf2f8;
+                        color: #831843;
+                    }
+                    
+                    .hero {
+                        background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+                        padding: 100px 0;
+                        text-align: center;
+                    }
+                    
+                    .hero h1 {
+                        color: #831843;
+                    }
+                    
+                    .hero p {
+                        color: #9d174d;
+                        font-size: 1.2rem;
+                        max-width: 700px;
+                        margin: 0 auto 30px;
+                    }
+                    
+                    .btn {
+                        background-color: #ec4899;
+                    }
+                    
+                    .btn:hover {
+                        background-color: #db2777;
+                    }
+                    
+                    .skill-card, .service-card, .project-card, .testimonial-card {
+                        border-left-color: #ec4899;
+                    }
+                    
+                    h2::after {
+                        background-color: #ec4899;
+                    }
+                    
+                    h2 {
+                        color: #831843;
+                    }
+                `,
+                
+                minimal: `
+                    body {
+                        background-color: white;
+                        color: #115e59;
+                    }
+                    
+                    .hero {
+                        padding: 100px 0;
+                        text-align: center;
+                    }
+                    
+                    .hero h1 {
+                        color: #115e59;
+                        font-size: 3rem;
+                    }
+                    
+                    .hero p {
+                        color: #0d9488;
+                        font-size: 1.2rem;
+                        max-width: 700px;
+                        margin: 0 auto 30px;
+                    }
+                    
+                    .btn {
+                        background-color: #14b8a6;
+                    }
+                    
+                    .btn:hover {
+                        background-color: #0d9488;
+                    }
+                    
+                    .skill-card, .service-card, .project-card, .testimonial-card {
+                        border-left-color: #14b8a6;
+                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+                    }
+                    
+                    h2::after {
+                        background-color: #14b8a6;
+                    }
+                    
+                    h2 {
+                        color: #115e59;
+                    }
+                `,
+                
+                gallery: `
+                    body {
+                        background-color: white;
+                        color: #92400e;
+                    }
+                    
+                    .hero {
+                        background-color: #fffbeb;
+                        padding: 100px 0;
+                        text-align: center;
+                    }
+                    
+                    .hero h1 {
+                        color: #92400e;
+                        font-size: 3rem;
+                    }
+                    
+                    .hero p {
+                        color: #b45309;
+                        font-size: 1.2rem;
+                        max-width: 700px;
+                        margin: 0 auto 30px;
+                    }
+                    
+                    .btn {
+                        background-color: #f59e0b;
+                    }
+                    
+                    .btn:hover {
+                        background-color: #d97706;
+                    }
+                    
+                    .skill-card, .service-card, .project-card, .testimonial-card {
+                        border-left-color: #f59e0b;
+                    }
+                    
+                    h2::after {
+                        background-color: #f59e0b;
+                    }
+                    
+                    h2 {
+                        color: #92400e;
+                    }
+                    
+                    .gallery-grid {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                        gap: 20px;
+                    }
+                `
+            };
+            
+            return cssMap[templateName] || cssMap.clean;
+        }
+    </script>
+</body>
+</html>
